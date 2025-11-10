@@ -1,0 +1,17 @@
+{
+  "name": "animal-sitting",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "npm -w apps/web run build && npm -w apps/api run build",
+    "dev": "concurrently -n web,api -c blue,green \"npm -w apps/web run dev\" \"npm -w apps/api run dev\"",
+    "lint": "echo \"Add linters later\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  }
+}
+
