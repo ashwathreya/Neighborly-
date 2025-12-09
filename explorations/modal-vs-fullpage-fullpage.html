@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exploration: Full Page Detail View</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #f5f5f5; }
+        .header { background: #fff; padding: 20px; border-bottom: 2px solid #ddd; }
+        .header h1 { color: #333; font-size: 24px; margin-bottom: 5px; }
+        .header p { color: #666; font-size: 14px; }
+        .back-button { background: #f3f4f6; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; margin-bottom: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; background: #fff; min-height: 100vh; }
+        .provider-header { margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #e5e7eb; }
+        .tabs { display: flex; gap: 10px; border-bottom: 2px solid #e5e7eb; margin-bottom: 30px; }
+        .tab { padding: 15px 25px; background: none; border: none; cursor: pointer; border-bottom: 3px solid transparent; }
+        .tab.active { border-bottom-color: #6366f1; color: #6366f1; font-weight: 600; }
+        .content-section { padding: 20px 0; }
+        .note { background: #fff3cd; border: 2px solid #ffc107; padding: 15px; margin-bottom: 20px; border-radius: 4px; }
+        .note strong { color: #856404; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Exploration: Full Page Detail View</h1>
+        <p>Dedicated page for provider details - more space, better for detailed information</p>
+    </div>
+    <div class="container">
+        <button class="back-button">← Back to Results</button>
+        <div class="note">
+            <strong>Design Consideration:</strong> Full page provides more space for detailed information and better mobile experience, but requires navigation away from results and loses context.
+        </div>
+        <div class="provider-header">
+            <h2>Sarah Johnson</h2>
+            <p>Pet Sitting • ⭐ 4.8 (120 reviews) • $45/hour</p>
+        </div>
+        <div class="tabs">
+            <button class="tab active">Overview</button>
+            <button class="tab">Experience</button>
+            <button class="tab">Portfolio</button>
+            <button class="tab">Reviews</button>
+        </div>
+        <div class="content-section">
+            <h3>About</h3>
+            <p>Detailed provider information and description...</p>
+        </div>
+    </div>
+</body>
+</html>
+
+

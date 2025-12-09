@@ -5,17 +5,19 @@ import { useState, useEffect } from 'react';
 interface LoginModalProps {
 	isOpen: boolean;
 	onClose: () => void;
+	initialMode?: 'login' | 'signup';
 }
 
 type AuthMode = 'login' | 'signup';
 
-export function LoginModal({ isOpen, onClose }: LoginModalProps) {
-	const [mode, setMode] = useState<AuthMode>('login');
+export function LoginModal({ isOpen, onClose, initialMode = 'login' }: LoginModalProps) {
+	const [mode, setMode] = useState<AuthMode>(initialMode);
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
 	const [role, setRole] = useState<'owner' | 'sitter'>('owner');
+	const [viewMode, setViewMode] = useState<'provider' | 'customer'>('customer'); // For login: how they want to use the platform
 	const [status, setStatus] = useState<string | null>(null);
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -27,11 +29,19 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
 			setPassword('');
 			setConfirmPassword('');
 			setRole('owner');
+			setViewMode('customer');
 			setStatus(null);
 			setIsLoading(false);
-			setMode('login');
+			setMode(initialMode);
 		}
-	}, [isOpen]);
+	}, [isOpen, initialMode]);
+
+	// Update mode when initialMode prop changes and modal is open
+	useEffect(() => {
+		if (isOpen) {
+			setMode(initialMode);
+		}
+	}, [initialMode, isOpen]);
 
 	// Close on Escape key
 	useEffect(() => {
@@ -44,17 +54,47 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
 		return () => document.removeEventListener('keydown', handleEscape);
 	}, [isOpen, onClose]);
 
+
 	if (!isOpen) return null;
 
 	async function handleSocialLogin(provider: string) {
 		setIsLoading(true);
 		setStatus(`Connecting to ${provider}...`);
-		
-		// Simulate API call
-		setTimeout(() => {
-			setStatus(`⚠️ ${provider} login is coming soon! For now, please use email sign-up.`);
+
+		try {
+			const base = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000';
+			const redirectUri = typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000';
+
+			// Initiate OAuth flow
+			const res = await fetch(`${base}/auth/oauth/${provider.toLowerCase()}?redirectUri=${encodeURIComponent(redirectUri)}`, {
+				method: 'GET',
+				signal: AbortSignal.timeout(5000)
+			});
+
+			if (!res.ok) {
+				const errorData = await res.json().catch(() => ({ error: 'OAuth initiation failed' }));
+				setStatus(`❌ ${errorData.error ?? 'Failed to start OAuth flow'}`);
+				setIsLoading(false);
+				return;
+			}
+
+			const data = await res.json();
+			
+			// Redirect to OAuth provider (or callback URL for demo)
+			if (data.authUrl) {
+				window.location.href = data.authUrl;
+			} else {
+				setStatus(`❌ No OAuth URL received`);
+				setIsLoading(false);
+			}
+		} catch (error: any) {
+			if (error.name === 'AbortError') {
+				setStatus('⏱️ Request timed out. Please check your connection.');
+			} else {
+				setStatus(`❌ Error: ${error.message ?? 'OAuth connection failed'}`);
+			}
 			setIsLoading(false);
-		}, 1000);
+		}
 	}
 
 	async function handleEmailAuth(e: React.FormEvent) {
@@ -116,10 +156,14 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
 					setStatus(`✅ Signed in as ${data.user.name}`);
 					if (typeof window !== 'undefined') {
 						localStorage.setItem('token', data.token);
-						localStorage.setItem('user', JSON.stringify(data.user));
+						// Store user with view mode preference
+						const userWithViewMode = { ...data.user, viewMode: viewMode };
+						localStorage.setItem('user', JSON.stringify(userWithViewMode));
+						localStorage.setItem('viewMode', viewMode); // Also store separately for easy access
 					}
 					setTimeout(() => {
 						onClose();
+						// Trigger page update by closing modal (parent component will detect user change)
 						window.location.reload();
 					}, 1500);
 				}
@@ -141,10 +185,15 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
 					setStatus(`✅ Account created! Welcome, ${data.user.name}!`);
 					if (typeof window !== 'undefined') {
 						localStorage.setItem('token', `fake-${data.user.id}`);
-						localStorage.setItem('user', JSON.stringify(data.user));
+						// Set viewMode based on role: sitter = provider, owner = customer
+						const viewMode = role === 'sitter' ? 'provider' : 'customer';
+						const userWithViewMode = { ...data.user, viewMode };
+						localStorage.setItem('user', JSON.stringify(userWithViewMode));
+						localStorage.setItem('viewMode', viewMode);
 					}
 					setTimeout(() => {
 						onClose();
+						// Trigger page update by closing modal (parent component will detect user change)
 						window.location.reload();
 					}, 2000);
 				}
@@ -164,6 +213,13 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
 
 	return (
 		<>
+			<style jsx global>{`
+				@keyframes gradientShift {
+					0% { background-position: 0% 50%; }
+					50% { background-position: 100% 50%; }
+					100% { background-position: 0% 50%; }
+				}
+			`}</style>
 			{/* Backdrop */}
 			<div
 				onClick={onClose}
@@ -239,12 +295,30 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
 							fontSize: '24px',
 							fontWeight: 800,
 							marginBottom: '32px',
-							background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%)',
-							WebkitBackgroundClip: 'text',
-							WebkitTextFillColor: 'transparent'
+							display: 'flex',
+							alignItems: 'center',
+							gap: '8px'
 						}}
 					>
-						🏘️ Neighborly
+						<span style={{ 
+							fontSize: '28px',
+							display: 'inline-block',
+							WebkitBackgroundClip: 'initial',
+							WebkitTextFillColor: 'initial',
+							backgroundClip: 'initial'
+						}}>
+							🏘️
+						</span>
+						<span style={{
+							background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%)',
+							backgroundSize: '200% 200%',
+							WebkitBackgroundClip: 'text',
+							WebkitTextFillColor: 'transparent',
+							backgroundClip: 'text',
+							animation: 'gradientShift 5s ease infinite'
+						}}>
+							Neighborly
+						</span>
 					</div>
 
 					{/* Mode Toggle */}
@@ -320,69 +394,153 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
 							: 'Join thousands of neighbors finding trusted services'}
 					</p>
 
-					{/* Social Login Buttons */}
-					<div style={{ display: 'grid', gap: '12px', marginBottom: '24px' }}>
-						{[
-							{ name: 'Google', icon: '🔵', color: '#4285F4' },
-							{ name: 'Facebook', icon: '📘', color: '#1877F2' },
-							{ name: 'Apple', icon: '🍎', color: '#000000' }
-						].map((provider) => (
+					{/* View Mode Selector - Only for login */}
+					{mode === 'login' && (
+						<div
+							style={{
+								background: '#f3f4f6',
+								padding: '4px',
+								borderRadius: '12px',
+								marginBottom: '24px',
+								display: 'flex',
+								gap: '4px'
+							}}
+						>
 							<button
-								key={provider.name}
 								type="button"
-								onClick={() => handleSocialLogin(provider.name)}
-								disabled={isLoading}
+								onClick={() => setViewMode('customer')}
 								style={{
-									width: '100%',
+									flex: 1,
 									padding: '12px 16px',
-									border: '2px solid #e5e7eb',
-									borderRadius: '12px',
-									background: 'white',
-									color: '#374151',
-									fontSize: '15px',
-									fontWeight: 500,
-									cursor: isLoading ? 'not-allowed' : 'pointer',
+									border: 'none',
+									borderRadius: '8px',
+									background: viewMode === 'customer' ? 'white' : 'transparent',
+									color: viewMode === 'customer' ? '#111827' : '#6b7280',
+									fontWeight: viewMode === 'customer' ? 600 : 500,
+									fontSize: '14px',
+									cursor: 'pointer',
 									transition: 'all 0.2s',
+									boxShadow: viewMode === 'customer' ? '0 2px 4px rgba(0,0,0,0.1)' : 'none',
 									display: 'flex',
 									alignItems: 'center',
 									justifyContent: 'center',
-									gap: '12px',
-									opacity: isLoading ? 0.6 : 1
-								}}
-								onMouseEnter={(e) => {
-									if (!isLoading) {
-										e.currentTarget.style.borderColor = provider.color;
-										e.currentTarget.style.background = `${provider.color}10`;
-										e.currentTarget.style.transform = 'translateY(-2px)';
-									}
-								}}
-								onMouseLeave={(e) => {
-									if (!isLoading) {
-										e.currentTarget.style.borderColor = '#e5e7eb';
-										e.currentTarget.style.background = 'white';
-										e.currentTarget.style.transform = 'translateY(0)';
-									}
+									gap: '8px'
 								}}
 							>
-								<span style={{ fontSize: '20px' }}>{provider.icon}</span>
-								<span>Continue with {provider.name}</span>
+								<span>🔍</span>
+								<span>Finding Services</span>
 							</button>
-						))}
-					</div>
+							<button
+								type="button"
+								onClick={() => setViewMode('provider')}
+								style={{
+									flex: 1,
+									padding: '12px 16px',
+									border: 'none',
+									borderRadius: '8px',
+									background: viewMode === 'provider' ? 'white' : 'transparent',
+									color: viewMode === 'provider' ? '#111827' : '#6b7280',
+									fontWeight: viewMode === 'provider' ? 600 : 500,
+									fontSize: '14px',
+									cursor: 'pointer',
+									transition: 'all 0.2s',
+									boxShadow: viewMode === 'provider' ? '0 2px 4px rgba(0,0,0,0.1)' : 'none',
+									display: 'flex',
+									alignItems: 'center',
+									justifyContent: 'center',
+									gap: '8px'
+								}}
+							>
+								<span>💼</span>
+								<span>Offering Services</span>
+							</button>
+						</div>
+					)}
 
-					{/* Divider */}
-					<div
-						style={{
-							display: 'flex',
-							alignItems: 'center',
-							gap: '16px',
-							marginBottom: '24px'
-						}}
-					>
-						<div style={{ flex: 1, height: '1px', background: '#e5e7eb' }} />
-						<span style={{ fontSize: '14px', color: '#9ca3af' }}>or</span>
-						<div style={{ flex: 1, height: '1px', background: '#e5e7eb' }} />
-					</div>
+					{/* Social Login Buttons */}
+					{mode === 'login' && (
+						<>
+							<div style={{ display: 'grid', gap: '12px', marginBottom: '24px' }}>
+								{[
+									{ name: 'Google', icon: '🔵', color: '#4285F4' },
+									{ name: 'Facebook', icon: '📘', color: '#1877F2' },
+									{ name: 'Apple', icon: '🍎', color: '#000000' }
+								].map((provider) => (
+									<button
+										key={provider.name}
+										type="button"
+										onClick={() => handleSocialLogin(provider.name)}
+										disabled={isLoading}
+										style={{
+											width: '100%',
+											padding: '12px 16px',
+											border: '2px solid #e5e7eb',
+											borderRadius: '12px',
+											background: 'white',
+											color: '#374151',
+											fontSize: '15px',
+											fontWeight: 500,
+											cursor: isLoading ? 'not-allowed' : 'pointer',
+											transition: 'all 0.2s',
+											display: 'flex',
+											alignItems: 'center',
+											justifyContent: 'center',
+											gap: '12px',
+											opacity: isLoading ? 0.6 : 1
+										}}
+										onMouseEnter={(e) => {
+											if (!isLoading) {
+												e.currentTarget.style.borderColor = provider.color;
+												e.currentTarget.style.background = `${provider.color}10`;
+												e.currentTarget.style.transform = 'translateY(-2px)';
+											}
+										}}
+										onMouseLeave={(e) => {
+											if (!isLoading) {
+												e.currentTarget.style.borderColor = '#e5e7eb';
+												e.currentTarget.style.background = 'white';
+												e.currentTarget.style.transform = 'translateY(0)';
+											}
+										}}
+									>
+										<span style={{ fontSize: '20px' }}>{provider.icon}</span>
+										<span>Continue with {provider.name}</span>
+									</button>
+								))}
+							</div>
+
+							{/* Divider */}
+							<div
+								style={{
+									display: 'flex',
+									alignItems: 'center',
+									gap: '16px',
+									marginBottom: '24px'
+								}}
+							>
+								<div style={{ flex: 1, height: '1px', background: '#e5e7eb' }} />
+								<span style={{ fontSize: '14px', color: '#9ca3af' }}>or</span>
+								<div style={{ flex: 1, height: '1px', background: '#e5e7eb' }} />
+							</div>
+						</>
+					)}
+
+					{/* Sign up instruction */}
+					{mode === 'signup' && (
+						<div
+							style={{
+								background: 'linear-gradient(135deg, #6366f110 0%, #8b5cf610 100%)',
+								padding: '16px',
+								borderRadius: '12px',
+								marginBottom: '24px',
+								border: '2px solid #6366f120'
+							}}
+						>
+							<p style={{ margin: 0, fontSize: '14px', color: '#6366f1', fontWeight: 600, textAlign: 'center' }}>
+								✨ Fill out the form below to create your account
+							</p>
+						</div>
+					)}
 
 					{/* Email Form */}
 					<form onSubmit={handleEmailAuth} style={{ display: 'grid', gap: '20px' }}>

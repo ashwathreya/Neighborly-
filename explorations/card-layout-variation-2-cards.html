@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exploration 2: Card Layout</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #f5f5f5; padding: 20px; }
+        .header { background: #fff; padding: 20px; margin-bottom: 20px; border-bottom: 2px solid #ddd; }
+        .header h1 { color: #333; font-size: 24px; margin-bottom: 5px; }
+        .header p { color: #666; font-size: 14px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .card { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 20px; }
+        .card-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px; }
+        .avatar { width: 50px; height: 50px; background: #6366f1; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; }
+        .badge { padding: 4px 8px; background: #e5e7eb; border-radius: 4px; font-size: 11px; }
+        .card h3 { margin-bottom: 8px; color: #333; }
+        .card p { color: #666; font-size: 14px; margin: 4px 0; }
+        .note { background: #fff3cd; border: 2px solid #ffc107; padding: 15px; margin-bottom: 20px; border-radius: 4px; }
+        .note strong { color: #856404; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Exploration 2: Card Layout</h1>
+        <p>Grid-based cards - more information visible, better for comparison</p>
+    </div>
+    <div class="container">
+        <div class="note">
+            <strong>Design Consideration:</strong> Cards allow more information display and better visual hierarchy, but require more vertical space.
+        </div>
+        <div class="grid">
+            <div class="card">
+                <div class="card-header">
+                    <div class="avatar">SJ</div>
+                    <span class="badge">Rover</span>
+                </div>
+                <h3>Sarah Johnson</h3>
+                <p>Pet Sitting</p>
+                <p>⭐ 4.8 (120 reviews)</p>
+                <p>$45/hour</p>
+                <p>📍 2.3 miles away</p>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="avatar">MC</div>
+                    <span class="badge">Wyzant</span>
+                </div>
+                <h3>Mike Chen</h3>
+                <p>Math Tutoring</p>
+                <p>⭐ 4.9 (89 reviews)</p>
+                <p>$50/hour</p>
+                <p>📍 1.8 miles away</p>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="avatar">EW</div>
+                    <span class="badge">Thumbtack</span>
+                </div>
+                <h3>Emma Williams</h3>
+                <p>House Cleaning</p>
+                <p>⭐ 4.7 (156 reviews)</p>
+                <p>$40/hour</p>
+                <p>📍 3.1 miles away</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+

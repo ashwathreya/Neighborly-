@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Problem: Fragmented Platforms</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            padding: 30px;
+            background: #fff;
+            margin-bottom: 20px;
+            border: 2px dashed #999;
+        }
+        .header h1 {
+            color: #d32f2f;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .header p {
+            color: #666;
+            font-size: 16px;
+        }
+        .platforms {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .platform {
+            background: #fff;
+            border: 2px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .platform h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 20px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        .platform-content {
+            color: #666;
+            font-size: 14px;
+        }
+        .platform-content p {
+            margin: 10px 0;
+        }
+        .search-box {
+            background: #f9f9f9;
+            padding: 15px;
+            border: 1px solid #ddd;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            margin: 5px 0;
+        }
+        .search-box button {
+            padding: 8px 15px;
+            background: #4a90e2;
+            color: white;
+            border: none;
+            margin-top: 5px;
+            cursor: pointer;
+        }
+        .result {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            font-size: 13px;
+        }
+        .note {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 1400px;
+            border-radius: 8px;
+        }
+        .note h3 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        .note ul {
+            margin-left: 20px;
+            color: #856404;
+        }
+        .note li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>THE PROBLEM: Platform Fragmentation</h1>
+        <p>Users must visit multiple platforms separately - each with different interfaces, search methods, and limited comparison</p>
+    </div>
+
+    <div class="note">
+        <h3>Pain Points:</h3>
+        <ul>
+            <li>Must visit 5+ different websites</li>
+            <li>Each platform has different interface to learn</li>
+            <li>Can't compare providers across platforms</li>
+            <li>Time consuming: 2-4 hours of research</li>
+            <li>Inconsistent data presentation</li>
+        </ul>
+    </div>
+
+    <div class="platforms">
+        <div class="platform">
+            <h2>Rover.com</h2>
+            <div class="platform-content">
+                <div class="search-box">
+                    <input type="text" placeholder="Find pet sitters">
+                    <input type="text" placeholder="Location">
+                    <button>Search</button>
+                </div>
+                <div class="result">
+                    <strong>Sarah J.</strong> - $45/hr - ⭐ 4.8
+                </div>
+                <div class="result">
+                    <strong>Mike C.</strong> - $50/hr - ⭐ 4.9
+                </div>
+            </div>
+        </div>
+
+        <div class="platform">
+            <h2>Care.com</h2>
+            <div class="platform-content">
+                <div class="search-box">
+                    <input type="text" placeholder="Search caregivers">
+                    <input type="text" placeholder="Zip code">
+                    <button>Find</button>
+                </div>
+                <div class="result">
+                    <strong>Emma W.</strong> - $40/hr - ⭐ 4.7
+                </div>
+                <div class="result">
+                    <strong>David M.</strong> - $35/hr - ⭐ 4.6
+                </div>
+            </div>
+        </div>
+
+        <div class="platform">
+            <h2>Thumbtack</h2>
+            <div class="platform-content">
+                <div class="search-box">
+                    <input type="text" placeholder="What do you need?">
+                    <input type="text" placeholder="Where?">
+                    <button>Get Quotes</button>
+                </div>
+                <div class="result">
+                    <strong>James W.</strong> - $55/hr - ⭐ 4.9
+                </div>
+                <div class="result">
+                    <strong>Lisa A.</strong> - $48/hr - ⭐ 4.8
+                </div>
+            </div>
+        </div>
+
+        <div class="platform">
+            <h2>TaskRabbit</h2>
+            <div class="platform-content">
+                <div class="search-box">
+                    <input type="text" placeholder="What task?">
+                    <input type="text" placeholder="Address">
+                    <button>Book</button>
+                </div>
+                <div class="result">
+                    <strong>Robert T.</strong> - $42/hr - ⭐ 4.7
+                </div>
+                <div class="result">
+                    <strong>Anna K.</strong> - $50/hr - ⭐ 4.9
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+

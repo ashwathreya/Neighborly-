@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hierarchy: Before (Noisy)</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #f5f5f5; padding: 20px; }
+        .header { background: #fff; padding: 20px; margin-bottom: 20px; border-bottom: 2px solid #ddd; }
+        .header h1 { color: #333; font-size: 24px; margin-bottom: 5px; }
+        .header p { color: #666; font-size: 14px; }
+        .container { max-width: 1200px; margin: 0 auto; background: #fff; padding: 30px; }
+        .card { border: 2px solid #333; padding: 20px; margin-bottom: 20px; background: #fff; }
+        .card h3 { font-size: 24px; color: #000; margin-bottom: 10px; }
+        .card p { font-size: 16px; color: #333; margin: 5px 0; }
+        .badge { background: #ff0000; color: white; padding: 5px 10px; border-radius: 4px; display: inline-block; margin: 5px; }
+        .price { font-size: 28px; color: #000; font-weight: bold; }
+        .note { background: #fee2e2; border: 2px solid #ef4444; padding: 15px; margin-bottom: 20px; border-radius: 4px; }
+        .note strong { color: #991b1b; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Hierarchy: Before (Visual Noise)</h1>
+        <p>Everything competes for attention - no clear hierarchy</p>
+    </div>
+    <div class="container">
+        <div class="note">
+            <strong>Issues:</strong> All elements same weight, too many colors, no clear focus, information overload, difficult to scan.
+        </div>
+        <div class="card">
+            <h3>Sarah Johnson</h3>
+            <p>Pet Sitting Service Provider</p>
+            <p>Location: San Francisco, CA</p>
+            <p>Distance: 2.3 miles away</p>
+            <p>Rating: 4.8 out of 5 stars</p>
+            <p>Reviews: 120 customer reviews</p>
+            <p>Price: $45 per hour</p>
+            <p>Availability: Available now</p>
+            <span class="badge">Rover</span>
+            <span class="badge">Verified</span>
+            <span class="badge">Top Rated</span>
+            <span class="badge">Fast Response</span>
+            <span class="price">$45/hour</span>
+            <p>Specialties: Dog Walking, Pet Sitting, Overnight Care</p>
+        </div>
+    </div>
+</body>
+</html>
+
+

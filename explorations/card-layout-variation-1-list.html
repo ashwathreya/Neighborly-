@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exploration 1: List Layout</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #f5f5f5; padding: 20px; }
+        .header { background: #fff; padding: 20px; margin-bottom: 20px; border-bottom: 2px solid #ddd; }
+        .header h1 { color: #333; font-size: 24px; margin-bottom: 5px; }
+        .header p { color: #666; font-size: 14px; }
+        .container { max-width: 1200px; margin: 0 auto; background: #fff; padding: 30px; }
+        .result-item { padding: 20px; border-bottom: 1px solid #eee; display: flex; gap: 20px; }
+        .result-item:last-child { border-bottom: none; }
+        .avatar { width: 60px; height: 60px; background: #6366f1; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; }
+        .info { flex: 1; }
+        .info h3 { margin-bottom: 8px; color: #333; }
+        .info p { color: #666; font-size: 14px; margin: 4px 0; }
+        .badge { display: inline-block; padding: 4px 8px; background: #e5e7eb; border-radius: 4px; font-size: 12px; margin-right: 8px; }
+        .note { background: #fff3cd; border: 2px solid #ffc107; padding: 15px; margin-bottom: 20px; border-radius: 4px; }
+        .note strong { color: #856404; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Exploration 1: List Layout</h1>
+        <p>Simple list view - minimal information, easy to scan</p>
+    </div>
+    <div class="container">
+        <div class="note">
+            <strong>Design Consideration:</strong> List layout is familiar and scannable, but limits information visibility and comparison capability.
+        </div>
+        <div class="result-item">
+            <div class="avatar">SJ</div>
+            <div class="info">
+                <h3>Sarah Johnson</h3>
+                <p>Pet Sitting • $45/hour</p>
+                <p>⭐ 4.8 (120 reviews) • 📍 2.3 miles away</p>
+                <span class="badge">Rover</span>
+                <span class="badge">Verified</span>
+            </div>
+        </div>
+        <div class="result-item">
+            <div class="avatar">MC</div>
+            <div class="info">
+                <h3>Mike Chen</h3>
+                <p>Math Tutoring • $50/hour</p>
+                <p>⭐ 4.9 (89 reviews) • 📍 1.8 miles away</p>
+                <span class="badge">Wyzant</span>
+                <span class="badge">Verified</span>
+            </div>
+        </div>
+        <div class="result-item">
+            <div class="avatar">EW</div>
+            <div class="info">
+                <h3>Emma Williams</h3>
+                <p>House Cleaning • $40/hour</p>
+                <p>⭐ 4.7 (156 reviews) • 📍 3.1 miles away</p>
+                <span class="badge">Thumbtack</span>
+                <span class="badge">Verified</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+

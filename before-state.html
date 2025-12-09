@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neighborly - Before State (Initial Version)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        .header {
+            background: #fff;
+            padding: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        .header h1 {
+            font-size: 24px;
+            color: #333;
+        }
+        .nav {
+            margin-top: 10px;
+        }
+        .nav a {
+            margin-right: 20px;
+            text-decoration: none;
+            color: #666;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        .search-box {
+            background: #fff;
+            padding: 30px;
+            border: 1px solid #ddd;
+            margin-bottom: 30px;
+        }
+        .search-box h2 {
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+        .search-form {
+            display: flex;
+            gap: 10px;
+        }
+        .search-form input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            flex: 1;
+        }
+        .search-form button {
+            padding: 10px 20px;
+            background: #4a90e2;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .categories {
+            background: #fff;
+            padding: 30px;
+            border: 1px solid #ddd;
+            margin-bottom: 30px;
+        }
+        .categories h2 {
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+        .category-list {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .category-item {
+            padding: 15px 20px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            cursor: pointer;
+        }
+        .results {
+            background: #fff;
+            padding: 30px;
+            border: 1px solid #ddd;
+        }
+        .results h2 {
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+        .result-item {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .result-item:last-child {
+            border-bottom: none;
+        }
+        .result-item h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .result-item p {
+            color: #666;
+            margin: 5px 0;
+        }
+        .note {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .note strong {
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Neighborly</h1>
+        <div class="nav">
+            <a href="#">Home</a>
+            <a href="#">Search</a>
+            <a href="#">Login</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="note">
+            <strong>BEFORE STATE:</strong> This represents the initial basic version - simple layout, minimal styling, basic functionality, no platform aggregation, limited features.
+        </div>
+
+        <div class="search-box">
+            <h2>Find Services</h2>
+            <div class="search-form">
+                <input type="text" placeholder="What service do you need?">
+                <input type="text" placeholder="Location">
+                <button>Search</button>
+            </div>
+        </div>
+
+        <div class="categories">
+            <h2>Categories</h2>
+            <div class="category-list">
+                <div class="category-item">Pet Care</div>
+                <div class="category-item">Home Services</div>
+                <div class="category-item">Tutoring</div>
+                <div class="category-item">Childcare</div>
+            </div>
+        </div>
+
+        <div class="results">
+            <h2>Search Results</h2>
+            <div class="result-item">
+                <h3>Provider Name</h3>
+                <p>Service Type: Pet Sitting</p>
+                <p>Price: $45/hour</p>
+                <p>Rating: 4.5 stars</p>
+            </div>
+            <div class="result-item">
+                <h3>Provider Name</h3>
+                <p>Service Type: Dog Walking</p>
+                <p>Price: $30/hour</p>
+                <p>Rating: 4.8 stars</p>
+            </div>
+            <div class="result-item">
+                <h3>Provider Name</h3>
+                <p>Service Type: Pet Grooming</p>
+                <p>Price: $60/hour</p>
+                <p>Rating: 4.6 stars</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+

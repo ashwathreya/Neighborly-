@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hierarchy: After (Refined)</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #f5f5f5; padding: 20px; }
+        .header { background: #fff; padding: 20px; margin-bottom: 20px; border-bottom: 2px solid #ddd; }
+        .header h1 { color: #333; font-size: 24px; margin-bottom: 5px; }
+        .header p { color: #666; font-size: 14px; }
+        .container { max-width: 1200px; margin: 0 auto; background: #fff; padding: 30px; }
+        .card { border: 1px solid #e5e7eb; padding: 24px; margin-bottom: 20px; background: #fff; border-radius: 12px; }
+        .card-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 16px; }
+        .card h3 { font-size: 20px; color: #111827; margin-bottom: 8px; font-weight: 700; }
+        .card .service-type { font-size: 14px; color: #6366f1; font-weight: 600; margin-bottom: 12px; }
+        .card .rating { font-size: 16px; color: #111827; margin: 4px 0; }
+        .card .location { font-size: 14px; color: #6b7280; margin: 4px 0; }
+        .card .price { font-size: 18px; color: #6366f1; font-weight: 700; margin-top: 12px; }
+        .badge { background: #e5e7eb; color: #374151; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 600; }
+        .badge-primary { background: #6366f1; color: white; }
+        .badges { display: flex; gap: 8px; margin-top: 12px; }
+        .note { background: #d1fae5; border: 2px solid #10b981; padding: 15px; margin-bottom: 20px; border-radius: 4px; }
+        .note strong { color: #065f46; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Hierarchy: After (Refined)</h1>
+        <p>Clear visual hierarchy - important information stands out</p>
+    </div>
+    <div class="container">
+        <div class="note">
+            <strong>Improvements:</strong> Clear typography hierarchy, color used strategically, grouped information, scannable layout, reduced visual noise.
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <div>
+                    <h3>Sarah Johnson</h3>
+                    <div class="service-type">Pet Sitting</div>
+                </div>
+                <span class="badge badge-primary">Rover</span>
+            </div>
+            <div class="rating">⭐ 4.8 <span style="color: #6b7280; font-size: 14px;">(120 reviews)</span></div>
+            <div class="location">📍 2.3 miles away</div>
+            <div class="price">$45/hour</div>
+            <div class="badges">
+                <span class="badge">Verified</span>
+                <span class="badge">Top Rated</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+

@@ -47,11 +47,19 @@ npm run dev
 - Web: http://localhost:3000
 - API: http://localhost:4000
 
-Optional environment variable for the web app to reach the API:
+Optional environment variables:
+
 ```bash
-# apps/web
+# apps/web/.env.local (create this file)
 NEXT_PUBLIC_API_URL=http://localhost:4000
+
+# Google Maps API (Optional - for map embeds in search results)
+# Get your API key from: https://console.cloud.google.com/google/maps-apis
+# Enable "Maps Embed API" in your Google Cloud project
+NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_api_key_here
 ```
+
+**Note:** If you don't set `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY`, the search results will show a fallback map UI with location information and a link to Google Maps instead of an embedded map.
 
 ## API Endpoints (MVP)
 - `GET /sitters` - list sitters with optional `petType`

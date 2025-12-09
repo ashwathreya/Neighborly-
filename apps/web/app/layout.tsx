@@ -25,6 +25,26 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 					lineHeight: 1.6
 				}}
 			>
+				<style>{`
+					@keyframes float0 {
+						0%, 100% { transform: translate(0, 0) rotate(0deg); }
+						25% { transform: translate(20px, -30px) rotate(90deg); }
+						50% { transform: translate(-15px, -60px) rotate(180deg); }
+						75% { transform: translate(-30px, -30px) rotate(270deg); }
+					}
+					@keyframes float1 {
+						0%, 100% { transform: translate(0, 0) rotate(0deg); }
+						33% { transform: translate(-25px, 25px) rotate(120deg); }
+						66% { transform: translate(25px, -25px) rotate(240deg); }
+					}
+					@keyframes float2 {
+						0%, 100% { transform: translate(0, 0) rotate(0deg); }
+						20% { transform: translate(30px, 20px) rotate(72deg); }
+						40% { transform: translate(-20px, 40px) rotate(144deg); }
+						60% { transform: translate(-40px, 20px) rotate(216deg); }
+						80% { transform: translate(20px, -20px) rotate(288deg); }
+					}
+				`}</style>
 				{children}
 			</body>
 		</html>

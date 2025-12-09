@@ -8,10 +8,14 @@
   "scripts": {
     "build": "npm -w apps/web run build && npm -w apps/api run build",
     "dev": "concurrently -n web,api -c blue,green \"npm -w apps/web run dev\" \"npm -w apps/api run dev\"",
-    "lint": "echo \"Add linters later\""
+    "lint": "echo \"Add linters later\"",
+    "screenshots": "node capture-screenshots.js"
   },
   "devDependencies": {
-    "concurrently": "^9.0.1"
+    "concurrently": "^9.0.1",
+    "puppeteer": "^24.32.0"
+  },
+  "dependencies": {
+    "sharp": "^0.34.5"
   }
 }
-

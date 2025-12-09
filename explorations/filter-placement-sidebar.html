@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exploration: Filters in Sidebar</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #f5f5f5; padding: 20px; }
+        .header { background: #fff; padding: 20px; margin-bottom: 20px; border-bottom: 2px solid #ddd; }
+        .header h1 { color: #333; font-size: 24px; margin-bottom: 5px; }
+        .header p { color: #666; font-size: 14px; }
+        .container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 300px 1fr; gap: 20px; }
+        .sidebar { background: #fff; padding: 20px; border-radius: 8px; }
+        .sidebar h3 { margin-bottom: 15px; color: #333; }
+        .filter-group { margin-bottom: 20px; }
+        .filter-group label { display: block; margin-bottom: 8px; font-size: 13px; color: #666; font-weight: 600; }
+        .filter-group select, .filter-group input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; }
+        .results-area { background: #fff; padding: 20px; border-radius: 8px; }
+        .results { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .card { background: #f9fafb; border: 1px solid #ddd; border-radius: 8px; padding: 15px; }
+        .note { background: #fff3cd; border: 2px solid #ffc107; padding: 15px; margin-bottom: 20px; border-radius: 4px; grid-column: 1 / -1; }
+        .note strong { color: #856404; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Exploration: Filters in Sidebar</h1>
+        <p>Vertical sidebar - more space for filters, collapsible, better for complex filtering</p>
+    </div>
+    <div class="container">
+        <div class="note">
+            <strong>Design Consideration:</strong> Sidebar allows more filter options and better organization, but reduces content width. Can be collapsible on mobile.
+        </div>
+        <div class="sidebar">
+            <h3>Filters</h3>
+            <div class="filter-group">
+                <label>Price Range</label>
+                <input type="range" min="15" max="100">
+            </div>
+            <div class="filter-group">
+                <label>Rating</label>
+                <select><option>4.0+</option></select>
+            </div>
+            <div class="filter-group">
+                <label>Platform</label>
+                <select><option>All Platforms</option></select>
+            </div>
+            <div class="filter-group">
+                <label>Distance</label>
+                <select><option>Within 10 miles</option></select>
+            </div>
+            <div class="filter-group">
+                <label>Verified Only</label>
+                <input type="checkbox">
+            </div>
+        </div>
+        <div class="results-area">
+            <div class="results">
+                <div class="card">Provider Card 1</div>
+                <div class="card">Provider Card 2</div>
+                <div class="card">Provider Card 3</div>
+                <div class="card">Provider Card 4</div>
+                <div class="card">Provider Card 5</div>
+                <div class="card">Provider Card 6</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+

@@ -7,6 +7,7 @@ import { authRouter } from './routes/auth';
 import { reviewsRouter } from './routes/reviews';
 import { messagesRouter } from './routes/messages';
 import { paymentsRouter } from './routes/payments';
+import { aggregateRouter } from './routes/aggregate';
 
 const app = express();
 app.use(cors());
@@ -20,6 +21,7 @@ app.use('/auth', authRouter);
 app.use('/reviews', reviewsRouter);
 app.use('/messages', messagesRouter);
 app.use('/payments', paymentsRouter);
+app.use('/aggregate', aggregateRouter);
 
 const port = process.env.PORT ? Number(process.env.PORT) : 4000;
 app.listen(port, () => {
